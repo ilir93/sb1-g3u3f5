@@ -20,24 +20,7 @@ export default function CityList({ country, onCitySelect }: CityListProps) {
             !['Prishtinë', 'Prizren', 'Pejë', 'Mitrovicë', 'Gjakovë', 'Gjilan', 'Ferizaj'].includes(city)
           )
           .map(([city]) => city)
-          .sort();
-      }
-      if (countryCode === 'kosovo') {
-        return allCities
-          .filter(([city]) => 
-            ['Prishtinë', 'Prizren', 'Pejë', 'Mitrovicë', 'Gjakovë', 'Gjilan', 'Ferizaj',
-             'Deçan', 'Dragash', 'Istog', 'Klinë', 'Lipjan', 'Malishevë', 'Rahovec', 'Vushtrri'].includes(city)
-          )
-          .map(([city]) => city)
-          .sort();
-      }
-      if (countryCode === 'macedonia') {
-        return allCities
-          .filter(([city]) => 
-            ['Shkup', 'Tetovë', 'Kumanovë', 'Ohër', 'Gostivar', 'Strugë', 'Dibër'].includes(city)
-          )
-          .map(([city]) => city)
-          .sort();
+          .sort((a, b) => a.localeCompare(b, 'sq'));
       }
       return [];
     };
@@ -52,9 +35,6 @@ export default function CityList({ country, onCitySelect }: CityListProps) {
 
   return (
     <div className="mt-12 mb-16">
-      <h2 className="text-2xl font-bold text-sky-900 mb-6">
-        Qytetet Kryesore
-      </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
         {cities.map((city) => (
           <button

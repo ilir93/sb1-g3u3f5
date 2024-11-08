@@ -62,7 +62,6 @@ export default function CityWeatherPage({ city, onBack }: CityWeatherPageProps) 
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [country, setCountry] = useState('Shqipëri');
   const relatedCities = getRelatedCities(city);
 
   useEffect(() => {
@@ -82,19 +81,6 @@ export default function CityWeatherPage({ city, onBack }: CityWeatherPageProps) 
     loadWeatherData();
   }, [city]);
 
-  const getCountryLink = () => {
-    switch(country) {
-      case 'Shqipëri':
-        return '/shqiperia';
-      case 'Kosovë':
-        return '/kosova';
-      case 'Maqedoni e Veriut':
-        return '/maqedonia';
-      default:
-        return '/';
-    }
-  };
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center md:justify-between mb-8">
@@ -104,7 +90,7 @@ export default function CityWeatherPage({ city, onBack }: CityWeatherPageProps) 
               <Home className="w-4 h-4" />
             </a>
             <ChevronRight className="w-4 h-4 text-gray-400" />
-            <a href={getCountryLink()} className="hover:text-sky-800">{country}</a>
+            <a href="/shqiperia" className="hover:text-sky-800">Shqipëria</a>
             <ChevronRight className="w-4 h-4 text-gray-400" />
             <span className="text-gray-600">{city}</span>
           </nav>
@@ -149,7 +135,7 @@ export default function CityWeatherPage({ city, onBack }: CityWeatherPageProps) 
               {relatedCities.map((relatedCity) => (
                 <a
                   key={relatedCity}
-                  href={`${getCountryLink()}/${getCityUrlSlug(relatedCity)}`}
+                  href={`/shqiperia/${getCityUrlSlug(relatedCity)}`}
                   className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group"
                 >
                   <MapPin className="w-5 h-5 text-sky-500 mr-3 group-hover:text-sky-600" />
@@ -177,7 +163,7 @@ export default function CityWeatherPage({ city, onBack }: CityWeatherPageProps) 
                 majorCity !== city && (
                   <a
                     key={majorCity}
-                    href={`${getCountryLink()}/${getCityUrlSlug(majorCity)}`}
+                    href={`/shqiperia/${getCityUrlSlug(majorCity)}`}
                     className="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group"
                   >
                     <MapPin className="w-4 h-4 text-sky-500 mr-2 group-hover:text-sky-600" />

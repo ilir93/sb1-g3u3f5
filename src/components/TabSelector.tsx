@@ -8,9 +8,7 @@ interface TabSelectorProps {
 
 export default function TabSelector({ selectedCountry, onSelect }: TabSelectorProps) {
   const countries = [
-    { id: 'albania', name: 'Shqipëria' },
-    { id: 'kosovo', name: 'Kosova' },
-    { id: 'macedonia', name: 'Maqedonia e Veriut' }
+    { id: 'albania', name: 'Shqipëria' }
   ];
 
   return (
