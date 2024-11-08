@@ -1,0 +1,17 @@
+{
+  "name": "ParashikimiIMotit",
+  "short_name": "ParashikimiIMotit",
+  "description": "Parashikimi i motit për Shqipërinë, Kosovën dhe Maqedoninë",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0EA5E9",
+  "icons": [
+    {
+      "src": "/weather-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

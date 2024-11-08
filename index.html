@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="sq">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/weather-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parashikimi i Motit | Moti në Shqipëri, Kosovë dhe Maqedoni</title>
+    <meta name="description" content="Parashikimi i motit më i saktë për Shqipërinë, Kosovën dhe Maqedoninë e Veriut. Informacion i përditësuar për temperaturën, reshjet dhe erën në çdo qytet." />
+    <meta name="keywords" content="parashikimi i motit, moti sot, moti neser, moti shqiperi, moti kosove, moti maqedoni" />
+    
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://openweathermap.org" />
+    <link rel="dns-prefetch" href="https://openweathermap.org" />
+    
+    <!-- Add preload for weather icons -->
+    <link rel="preload" href="https://openweathermap.org/img/wn/01d@2x.png" as="image" />
+    <link rel="preload" href="https://openweathermap.org/img/wn/02d@2x.png" as="image" />
+    <link rel="preload" href="https://openweathermap.org/img/wn/03d@2x.png" as="image" />
+    <link rel="preload" href="https://openweathermap.org/img/wn/04d@2x.png" as="image" />
+    
+    <!-- Add meta tags for social sharing -->
+    <meta property="og:title" content="Parashikimi i Motit | Moti në Shqipëri, Kosovë dhe Maqedoni" />
+    <meta property="og:description" content="Parashikimi i motit më i saktë për Shqipërinë, Kosovën dhe Maqedoninë e Veriut." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://parashikimiimotit.com" />
+    
+    <!-- Add PWA meta tags -->
+    <meta name="theme-color" content="#0EA5E9" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ParashikimiIMotit" />
+    
+    <!-- Add manifest -->
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
