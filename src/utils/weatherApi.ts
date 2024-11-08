@@ -34,40 +34,29 @@ export const fetchWeatherData = async (city: string): Promise<WeatherData> => {
       throw new Error(`Qyteti "${city}" nuk u gjet në sistemin tonë`);
     }
 
-    const { lat, lon } = coordinates;
-
-    // Get current weather
+    // Get current weather using city ID
     const currentResponse = await axios.get(`${BASE_URL}/weather`, {
       params: {
-        lat,
-        lon,
+        id: coordinates.id,
         appid: API_KEY,
         units: 'metric',
         lang: 'sq'
       }
     });
 
-    // Get 5 day forecast
+    // Get 5 day forecast using coordinates (since forecast endpoint doesn't support city ID)
     const forecastResponse = await axios.get(`${BASE_URL}/forecast`, {
       params: {
-        lat,
-        lon,
+        lat: coordinates.lat,
+        lon: coordinates.lon,
         appid: API_KEY,
         units: 'metric',
         lang: 'sq'
       }
     });
-
-    if (!currentResponse.data || !forecastResponse.data) {
-      throw new Error('Të dhënat e motit nuk janë të vlefshme');
-    }
 
     const current = currentResponse.data;
     const forecast = forecastResponse.data;
-
-    if (!current.main || !current.weather?.[0] || !forecast.list) {
-      throw new Error('Formati i të dhënave të motit është i pavlefshëm');
-    }
 
     const weatherData: WeatherData = {
       current: {
