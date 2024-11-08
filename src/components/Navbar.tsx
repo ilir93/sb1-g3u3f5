@@ -4,8 +4,7 @@ import { Cloud } from 'lucide-react';
 export default function Navbar() {
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    window.history.pushState({}, '', '/');
-    window.dispatchEvent(new PopStateEvent('popstate'));
+    window.location.href = '/';
   };
 
   return (
