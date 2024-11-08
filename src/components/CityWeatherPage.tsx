@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Home, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Home, ChevronRight, MapPin } from 'lucide-react';
 import { fetchWeatherData, type WeatherData } from '../services/weatherApi';
 import WeatherDisplay from './WeatherDisplay';
+import { cityCoordinates } from '../utils/cityData';
 
 const monthsInAlbanian = [
   'Janar', 'Shkurt', 'Mars', 'Prill', 'Maj', 'Qershor',
@@ -27,11 +28,42 @@ interface CityWeatherPageProps {
   onBack: () => void;
 }
 
+const getRelatedCities = (currentCity: string): string[] => {
+  // Get coordinates of current city
+  const currentCoords = cityCoordinates[currentCity];
+  if (!currentCoords) return [];
+
+  // Calculate distances to all other cities
+  const cities = Object.entries(cityCoordinates)
+    .filter(([name]) => name !== currentCity)
+    .map(([name, coords]) => {
+      const distance = Math.sqrt(
+        Math.pow(coords.lat - currentCoords.lat, 2) + 
+        Math.pow(coords.lon - currentCoords.lon, 2)
+      );
+      return { name, distance };
+    })
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, 5) // Get 5 closest cities
+    .map(city => city.name);
+
+  return cities;
+};
+
+const getCityUrlSlug = (city: string): string => {
+  return city.toLowerCase()
+    .replace(/ë/g, 'e')
+    .replace(/ç/g, 'c')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+};
+
 export default function CityWeatherPage({ city, onBack }: CityWeatherPageProps) {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [country, setCountry] = useState('Shqipëri'); // Default country, you might want to pass this as a prop
+  const [country, setCountry] = useState('Shqipëri');
+  const relatedCities = getRelatedCities(city);
 
   useEffect(() => {
     const loadWeatherData = async () => {
@@ -98,14 +130,64 @@ export default function CityWeatherPage({ city, onBack }: CityWeatherPageProps) 
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-sky-200 border-b-sky-600"></div>
         </div>
       ) : weatherData ? (
-        <WeatherDisplay 
-          data={weatherData} 
-          cityName={city}
-          formatWeekday={(date: string) => {
-            const d = new Date(date);
-            return formatDate(d);
-          }}
-        />
+        <>
+          <WeatherDisplay 
+            data={weatherData} 
+            cityName={city}
+            formatWeekday={(date: string) => {
+              const d = new Date(date);
+              return formatDate(d);
+            }}
+          />
+
+          {/* Related Cities Section */}
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-sky-900 mb-6">
+              Moti në Qytetet e Afërta
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {relatedCities.map((relatedCity) => (
+                <a
+                  key={relatedCity}
+                  href={`${getCountryLink()}/${getCityUrlSlug(relatedCity)}`}
+                  className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group"
+                >
+                  <MapPin className="w-5 h-5 text-sky-500 mr-3 group-hover:text-sky-600" />
+                  <div>
+                    <h3 className="font-medium text-sky-900 group-hover:text-sky-700">
+                      Moti në {relatedCity}
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      Shiko parashikimin e motit
+                    </p>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-sky-400 ml-auto group-hover:text-sky-600" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Popular Cities Section */}
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-sky-900 mb-6">
+              Qytetet Kryesore
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {['Tiranë', 'Durrës', 'Vlorë', 'Shkodër', 'Elbasan', 'Fier', 'Korçë', 'Berat'].map((majorCity) => (
+                majorCity !== city && (
+                  <a
+                    key={majorCity}
+                    href={`${getCountryLink()}/${getCityUrlSlug(majorCity)}`}
+                    className="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group"
+                  >
+                    <MapPin className="w-4 h-4 text-sky-500 mr-2 group-hover:text-sky-600" />
+                    <span className="text-sky-900 group-hover:text-sky-700">{majorCity}</span>
+                  </a>
+                )
+              ))}
+            </div>
+          </div>
+        </>
       ) : null}
     </div>
   );
