@@ -13,38 +13,25 @@ export default function CityList({ country, onCitySelect }: CityListProps) {
     
     const filterCities = (countryCode: string) => {
       if (countryCode === 'albania') {
-        // Only Albanian cities (excluding Kosovo and Macedonia)
         return allCities
           .filter(([city]) => 
-            !city.includes('(') && // Excludes Kosovo cities with parentheses
-            !['Shkup', 'Tetovë', 'Kumanovë', 'Ohër', 'Gostivar', 'Strugë', 'Dibër'].includes(city) && // Excludes Macedonia cities
-            !['Prishtinë', 'Prizren', 'Pejë', 'Mitrovicë', 'Gjakovë', 'Gjilan', 'Ferizaj', 
-              'Drenas', 'Vushtrri', 'Deçan', 'Kaçanik', 'Skenderaj', 'Lipjan', 'Malishevë',
-              'Rahovec', 'Fushë Kosovë', 'Artanë', 'Besianë', 'Brezovicë', 'Burim', 'Dardanë',
-              'Graçanicë', 'Hani i Elezit', 'Junik', 'Kastriot', 'Klinë', 'Kllokot', 'Kuqishtë',
-              'Leposaviq', 'Mamushë', 'Partesh', 'Prevallë', 'Ranillug', 'Rugovë', 'Sharr',
-              'Shtërpcë', 'Shtime', 'Therandë', 'Viti', 'Zubin Potok', 'Zveçan'].includes(city) // Excludes all Kosovo cities
+            !city.includes('(') &&
+            !['Shkup', 'Tetovë', 'Kumanovë', 'Ohër', 'Gostivar', 'Strugë', 'Dibër'].includes(city) &&
+            !['Prishtinë', 'Prizren', 'Pejë', 'Mitrovicë', 'Gjakovë', 'Gjilan', 'Ferizaj'].includes(city)
           )
           .map(([city]) => city)
           .sort();
       }
       if (countryCode === 'kosovo') {
-        // Only Kosovo cities
         return allCities
           .filter(([city]) => 
-            city.includes('(') || // Cities with parentheses are from Kosovo
             ['Prishtinë', 'Prizren', 'Pejë', 'Mitrovicë', 'Gjakovë', 'Gjilan', 'Ferizaj',
-             'Drenas', 'Vushtrri', 'Deçan', 'Kaçanik', 'Skenderaj', 'Lipjan', 'Malishevë',
-             'Rahovec', 'Fushë Kosovë', 'Artanë', 'Besianë', 'Brezovicë', 'Burim', 'Dardanë',
-             'Graçanicë', 'Hani i Elezit', 'Junik', 'Kastriot', 'Klinë', 'Kllokot', 'Kuqishtë',
-             'Leposaviq', 'Mamushë', 'Partesh', 'Prevallë', 'Ranillug', 'Rugovë', 'Sharr',
-             'Shtërpcë', 'Shtime', 'Therandë', 'Viti', 'Zubin Potok', 'Zveçan'].includes(city)
+             'Deçan', 'Dragash', 'Istog', 'Klinë', 'Lipjan', 'Malishevë', 'Rahovec', 'Vushtrri'].includes(city)
           )
           .map(([city]) => city)
           .sort();
       }
       if (countryCode === 'macedonia') {
-        // Only Macedonia cities
         return allCities
           .filter(([city]) => 
             ['Shkup', 'Tetovë', 'Kumanovë', 'Ohër', 'Gostivar', 'Strugë', 'Dibër'].includes(city)
@@ -55,14 +42,13 @@ export default function CityList({ country, onCitySelect }: CityListProps) {
       return [];
     };
 
-    return {
-      albania: filterCities('albania'),
-      kosovo: filterCities('kosovo'),
-      macedonia: filterCities('macedonia')
-    };
-  }, []);
+    return filterCities(country);
+  }, [country]);
 
-  const selectedCities = cities[country as keyof typeof cities] || [];
+  const handleCityClick = (e: React.MouseEvent<HTMLButtonElement>, city: string) => {
+    e.preventDefault();
+    onCitySelect(city);
+  };
 
   return (
     <div className="mt-12 mb-16">
@@ -70,10 +56,10 @@ export default function CityList({ country, onCitySelect }: CityListProps) {
         Qytetet Kryesore
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-        {selectedCities.map((city) => (
+        {cities.map((city) => (
           <button
             key={city}
-            onClick={() => onCitySelect(city)}
+            onClick={(e) => handleCityClick(e, city)}
             className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow hover:bg-sky-50"
           >
             <MapPin className="w-4 h-4 text-sky-500 mr-2 flex-shrink-0" />

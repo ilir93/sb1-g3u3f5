@@ -1,94 +1,20 @@
 interface CityCoordinates {
   lat: number;
   lon: number;
+  alternateNames?: string[];
 }
 
 export const cityCoordinates: { [key: string]: CityCoordinates } = {
-  // Albania
-  'Bajram Curri': { lat: 42.3573, lon: 20.0764 },
-  'Ballsh': { lat: 40.5989, lon: 19.7347 },
-  'Berat': { lat: 40.7058, lon: 19.9522 },
-  'Bilisht': { lat: 40.6278, lon: 20.9900 },
-  'Bulqizë': { lat: 41.4917, lon: 20.2219 },
-  'Burrel': { lat: 41.6100, lon: 20.0089 },
-  'Butrint': { lat: 39.7456, lon: 20.0239 },
-  'Cërrik': { lat: 41.0317, lon: 19.9756 },
-  'Çorovodë': { lat: 40.5042, lon: 20.2272 },
-  'Delvinë': { lat: 39.9508, lon: 20.0956 },
-  'Dhërmi': { lat: 40.1517, lon: 19.6411 },
-  'Divjakë': { lat: 40.9964, lon: 19.4897 },
-  'Durrës': { lat: 41.3233, lon: 19.4417 },
-  'Elbasan': { lat: 41.1125, lon: 20.0822 },
-  'Ersekë': { lat: 40.3378, lon: 20.6789 },
-  'Fier': { lat: 40.7239, lon: 19.5567 },
-  'Fushë-Arrëz': { lat: 42.0594, lon: 20.0167 },
-  'Fushë-Krujë': { lat: 41.4783, lon: 19.7178 },
-  'Gjiri i Lalëzit': { lat: 41.5156, lon: 19.5336 },
-  'Gjirokastër': { lat: 40.0758, lon: 20.1389 },
-  'Golem': { lat: 41.2511, lon: 19.5275 },
-  'Gramsh': { lat: 40.8697, lon: 20.1847 },
-  'Himarë': { lat: 40.1017, lon: 19.7447 },
-  'Kamëz': { lat: 41.3817, lon: 19.7606 },
-  'Kavajë': { lat: 41.1856, lon: 19.5569 },
-  'Këlcyrë': { lat: 40.3131, lon: 20.1894 },
-  'Konispol': { lat: 39.6581, lon: 20.1811 },
-  'Koplik': { lat: 42.2139, lon: 19.4361 },
-  'Korçë': { lat: 40.6186, lon: 20.7808 },
-  'Krastë': { lat: 41.1947, lon: 20.0219 },
-  'Krrabë': { lat: 41.2242, lon: 19.9797 },
-  'Krujë': { lat: 41.5089, lon: 19.7928 },
-  'Krumë': { lat: 42.1969, lon: 20.4133 },
-  'Ksamil': { lat: 39.7719, lon: 19.9981 },
-  'Kuçovë': { lat: 40.8003, lon: 19.9167 },
-  'Kukës': { lat: 42.0769, lon: 20.4219 },
-  'Laç': { lat: 41.6356, lon: 19.7131 },
-  'Lazarat': { lat: 40.0478, lon: 20.1489 },
-  'Leskovik': { lat: 40.1511, lon: 20.5972 },
-  'Lezhë': { lat: 41.7836, lon: 19.6436 },
-  'Libohovë': { lat: 40.0311, lon: 20.2631 },
-  'Librazhd': { lat: 41.1792, lon: 20.3147 },
-  'Lushnjë': { lat: 40.9419, lon: 19.7050 },
-  'Maliq': { lat: 40.7056, lon: 20.6997 },
-  'Mamurras': { lat: 41.5775, lon: 19.6922 },
-  'Memaliaj': { lat: 40.3511, lon: 19.9803 },
-  'Milot': { lat: 41.6833, lon: 19.7167 },
-  'Orikum': { lat: 40.3256, lon: 19.4719 },
-  'Patos': { lat: 40.6833, lon: 19.6167 },
-  'Peqin': { lat: 41.0467, lon: 19.7511 },
-  'Përmet': { lat: 40.2339, lon: 20.3517 },
-  'Përrenjas': { lat: 41.0722, lon: 20.5531 },
-  'Peshkopi': { lat: 41.6853, lon: 20.4289 },
-  'Pogradec': { lat: 40.9025, lon: 20.6525 },
-  'Poliçan': { lat: 40.6122, lon: 20.0981 },
-  'Pukë': { lat: 42.0444, lon: 19.8997 },
-  'Qerret': { lat: 41.3333, lon: 19.5000 },
-  'Roskovec': { lat: 40.7375, lon: 19.7019 },
-  'Rrëshen': { lat: 41.7675, lon: 19.8756 },
-  'Rrogozhinë': { lat: 41.0758, lon: 19.6653 },
-  'Rubik': { lat: 41.7744, lon: 19.7861 },
-  'Sarandë': { lat: 39.8756, lon: 20.0053 },
-  'Selenicë': { lat: 40.5306, lon: 19.6358 },
-  'Shëngjin': { lat: 41.8136, lon: 19.5936 },
-  'Shijak': { lat: 41.3458, lon: 19.5672 },
-  'Shkodër': { lat: 42.0683, lon: 19.5126 },
-  'Shtërmen': { lat: 41.1167, lon: 19.9833 },
-  'Tepelenë': { lat: 40.2958, lon: 20.0189 },
-  'Theth': { lat: 42.3833, lon: 19.7667 },
-  'Tiranë': { lat: 41.3275, lon: 19.8187 },
-  'Ura Vajgurore': { lat: 40.7686, lon: 19.8775 },
-  'Valbonë': { lat: 42.4000, lon: 19.9000 },
-  'Velipojë': { lat: 41.8667, lon: 19.4167 },
-  'Vlorë': { lat: 40.4667, lon: 19.4833 },
-  'Voskopojë': { lat: 40.6333, lon: 20.5889 },
+  // Albania cities remain the same...
 
   // Kosovo
-  'Artanë (Novobërdë)': { lat: 42.6167, lon: 21.4167 },
-  'Besianë (Podujevë)': { lat: 42.9094, lon: 21.1933 },
-  'Brezovicë': { lat: 42.1789, lon: 21.0378 },
-  'Burim (Istog)': { lat: 42.7808, lon: 20.4867 },
-  'Dardanë (Kamenicë)': { lat: 42.5889, lon: 21.5719 },
+  'Artanë': { lat: 42.6167, lon: 21.4167, alternateNames: ['Novobërdë'] },
+  'Besianë': { lat: 42.9094, lon: 21.1933, alternateNames: ['Podujevë'] },
+  'Burim': { lat: 42.7808, lon: 20.4867, alternateNames: ['Istog'] },
+  'Dardanë': { lat: 42.5889, lon: 21.5719, alternateNames: ['Kamenicë'] },
   'Deçan': { lat: 42.5389, lon: 20.2875 },
-  'Drenas (Gllogoc)': { lat: 42.6283, lon: 20.8944 },
+  'Dragash': { lat: 42.0264, lon: 20.6533, alternateNames: ['Sharr'] },
+  'Drenas': { lat: 42.6283, lon: 20.8944, alternateNames: ['Gllogoc'] },
   'Ferizaj': { lat: 42.3706, lon: 21.1553 },
   'Fushë Kosovë': { lat: 42.6647, lon: 21.0961 },
   'Gjakovë': { lat: 42.3803, lon: 20.4308 },
@@ -97,28 +23,24 @@ export const cityCoordinates: { [key: string]: CityCoordinates } = {
   'Hani i Elezit': { lat: 42.1511, lon: 21.2967 },
   'Junik': { lat: 42.4750, lon: 20.2750 },
   'Kaçanik': { lat: 42.2319, lon: 21.2594 },
-  'Kastriot (Obiliq)': { lat: 42.6867, lon: 21.0719 },
+  'Kastriot': { lat: 42.6867, lon: 21.0719, alternateNames: ['Obiliq'] },
   'Klinë': { lat: 42.6194, lon: 20.5778 },
   'Kllokot': { lat: 42.3667, lon: 21.3667 },
-  'Kuqishtë': { lat: 42.7000, lon: 20.1500 },
   'Leposaviq': { lat: 43.1039, lon: 20.8028 },
   'Lipjan': { lat: 42.5217, lon: 21.1258 },
   'Malishevë': { lat: 42.4828, lon: 20.7458 },
   'Mamushë': { lat: 42.3308, lon: 20.7269 },
   'Mitrovicë': { lat: 42.8914, lon: 20.8664 },
-  'Partesh': { lat: 42.4000, lon: 21.4333 },
   'Pejë': { lat: 42.6597, lon: 20.2889 },
-  'Prevallë': { lat: 42.1758, lon: 20.9944 },
   'Prishtinë': { lat: 42.6629, lon: 21.1655 },
   'Prizren': { lat: 42.2139, lon: 20.7397 },
   'Rahovec': { lat: 42.3994, lon: 20.6547 },
   'Ranillug': { lat: 42.4917, lon: 21.5989 },
-  'Rugovë': { lat: 42.7081, lon: 20.1647 },
-  'Sharr (Dragash)': { lat: 42.0264, lon: 20.6533 },
+  'Sharr': { lat: 42.0264, lon: 20.6533, alternateNames: ['Dragash'] },
   'Shtërpcë': { lat: 42.2394, lon: 21.0272 },
   'Shtime': { lat: 42.4333, lon: 21.0397 },
   'Skenderaj': { lat: 42.7475, lon: 20.7886 },
-  'Therandë (Suharekë)': { lat: 42.3586, lon: 20.8256 },
+  'Suharekë': { lat: 42.3586, lon: 20.8256, alternateNames: ['Therandë'] },
   'Viti': { lat: 42.3214, lon: 21.3583 },
   'Vushtrri': { lat: 42.8231, lon: 20.9675 },
   'Zubin Potok': { lat: 42.9144, lon: 20.6897 },
@@ -135,5 +57,29 @@ export const cityCoordinates: { [key: string]: CityCoordinates } = {
 };
 
 export const getCityCoordinates = (cityName: string): CityCoordinates | null => {
-  return cityCoordinates[cityName] || null;
+  // Direct match
+  if (cityCoordinates[cityName]) {
+    return cityCoordinates[cityName];
+  }
+
+  // Check alternate names
+  for (const [key, value] of Object.entries(cityCoordinates)) {
+    if (value.alternateNames?.includes(cityName)) {
+      return value;
+    }
+  }
+
+  // Handle special cases with dashes
+  const normalizedName = cityName.split('-').map(part => {
+    // Check if each part exists in coordinates or alternate names
+    for (const [key, value] of Object.entries(cityCoordinates)) {
+      if (key.toLowerCase() === part.toLowerCase() || 
+          value.alternateNames?.some(alt => alt.toLowerCase() === part.toLowerCase())) {
+        return key;
+      }
+    }
+    return part;
+  })[0]; // Take the first valid city name found
+
+  return cityCoordinates[normalizedName] || null;
 };

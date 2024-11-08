@@ -53,7 +53,24 @@ function App() {
 
           <CityList 
             country={selectedCountry} 
-            onCitySelect={setSelectedCity}
+            onCitySelect={(city) => {
+              setSelectedCity(city);
+              const countryPath = {
+                'albania': 'shqiperia',
+                'kosovo': 'kosova',
+                'macedonia': 'maqedonia'
+              }[selectedCountry];
+              
+              const citySlug = city.toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/ë/g, 'e')
+                .replace(/ç/g, 'c')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '');
+                
+              window.history.pushState({}, '', `/${countryPath}/${citySlug}`);
+            }}
           />
 
           <SEOContent />
